@@ -20,6 +20,8 @@ const isValidPhone = (phone) => {
 };
 
 const BookService = () => {
+  const scriptUrl = 'https://script.google.com/macros/s/AKfycbyU7GZK5ncWmQiiJ_hIpcx0-a9tZTaEX1WKAaZ-LerHBras5w3j8JF62LLeqMXcOVq9tw/exec';
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -97,18 +99,38 @@ const BookService = () => {
     setErrors({});
     setLastSubmitTime(now);
 
-    setTimeout(() => {
-      setSubmitStatus('success');
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        service: '',
-        location: '',
-        message: '',
+    try {
+      const formPayload = new FormData();
+      formPayload.append('name', formData.name.trim());
+      formPayload.append('email', formData.email.trim());
+      formPayload.append('phone', formData.phone.trim());
+      formPayload.append('service', formData.service);
+      formPayload.append('location', formData.location.trim());
+      formPayload.append('message', formData.message.trim());
+
+      const response = await fetch(scriptUrl, {
+        method: 'POST',
+        body: formPayload,
       });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          service: '',
+          location: '',
+          message: '',
+        });
+      } else {
+        setErrors({ submit: 'Unable to submit your booking right now. Please try again later.' });
+      }
+    } catch (err) {
+      setErrors({ submit: 'Network error. Please check your connection and try again.' });
+    } finally {
       setIsSubmitting(false);
-    }, 500);
+    }
   };
 
   return (
