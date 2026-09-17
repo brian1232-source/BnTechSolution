@@ -75,17 +75,14 @@ const ContactUs = () => {
       formPayload.append('email', formData.email.trim());
       formPayload.append('message', formData.message.trim());
 
-      const response = await fetch(scriptUrl, {
+      await fetch(scriptUrl, {
         method: 'POST',
         body: formPayload,
+        mode: 'no-cors',
       });
 
-      if (response.ok) {
-        setSubmitStatus('success');
-        setFormData({ name: '', email: '', message: '' });
-      } else {
-        setErrors({ submit: 'Unable to send your message right now. Please try again later.' });
-      }
+      setSubmitStatus('success');
+      setFormData({ name: '', email: '', message: '' });
     } catch (err) {
       setErrors({ submit: 'Network error. Please check your connection and try again.' });
     } finally {

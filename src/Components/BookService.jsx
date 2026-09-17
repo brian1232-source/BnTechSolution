@@ -108,24 +108,21 @@ const BookService = () => {
       formPayload.append('location', formData.location.trim());
       formPayload.append('message', formData.message.trim());
 
-      const response = await fetch(scriptUrl, {
+      await fetch(scriptUrl, {
         method: 'POST',
         body: formPayload,
+        mode: 'no-cors',
       });
 
-      if (response.ok) {
-        setSubmitStatus('success');
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          service: '',
-          location: '',
-          message: '',
-        });
-      } else {
-        setErrors({ submit: 'Unable to submit your booking right now. Please try again later.' });
-      }
+      setSubmitStatus('success');
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        service: '',
+        location: '',
+        message: '',
+      });
     } catch (err) {
       setErrors({ submit: 'Network error. Please check your connection and try again.' });
     } finally {
