@@ -1,0 +1,60 @@
+.custom-services-section {
+  padding: 4.5rem 1.5rem;
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(59, 130, 246, 0.18),
+      transparent 26%
+    ),
+    radial-gradient(
+      circle at bottom left,
+      rgba(59, 130, 246, 0.12),
+      transparent 24%
+    ),
+    linear-gradient(180deg, #eff6ff 0%, #e0f2fe 45%, #f8fbff 100%);
+  color: #0f172a;
+  min-height: 70vh; /* Ensure it takes up enough vertical space */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-services-container {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  background-color: #ffffff;
+  padding: 3rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.custom-services-title {
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 800;
+  color: var(--navbar-bg, #1a0a2e);
+  margin: 0 0 1rem;
+}
+
+.custom-services-subtitle,
+.custom-services-content p {
+  font-size: 1.1rem;
+  color: #475569;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.custom-services-button {
+  display: inline-block;
+  background-color: var(--navbar-accent, #a855f7);
+  color: #ffffff;
+  padding: 0.8rem 1.8rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.custom-services-button:hover {
+  background-color: var(--navbar-bg, #1a0a2e);
+}

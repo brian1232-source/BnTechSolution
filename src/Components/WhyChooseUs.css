@@ -1,0 +1,66 @@
+.why-choose-us-section {
+  padding: 4.5rem 1.5rem;
+  background: linear-gradient(180deg, #eff6ff 0%, #e0f2fe 45%, #f8fbff 100%);
+}
+
+.why-choose-us-container {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.why-choose-us-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.why-choose-us-title {
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  font-weight: 800;
+  color: var(--navbar-bg, #1a0a2e);
+  margin: 0 0 0.5rem;
+  line-height: 1.1;
+}
+
+.why-choose-us-subtitle {
+  font-size: 1.15rem;
+  color: #475569;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.why-choose-us-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.reason-card {
+  background: #ffffff;
+  border: 1px solid var(--top-bar-border, #e0e0e0);
+  border-radius: 20px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.reason-card-icon {
+  font-size: 2.5rem;
+  color: var(--navbar-accent, #a855f7);
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+.reason-card-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 0.5rem;
+}
+
+.reason-card-description {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #64748b;
+  margin: 0;
+}

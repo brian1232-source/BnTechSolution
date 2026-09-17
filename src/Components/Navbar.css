@@ -1,0 +1,239 @@
+:root {
+  /* Poster-matched palette */
+  --navbar-bg: #1a0a2e; /* deep dark purple background */
+  --navbar-bg-2: #0f0617; /* near-black purple for gradient depth */
+  --navbar-text-color: #ffffff; /* white text like poster headings */
+  --navbar-accent: #a855f7; /* main purple/violet accent (BN Tech logo color) */
+  --navbar-accent-soft: #c084fc; /* lighter lavender for secondary accents */
+  --navbar-hover-border: #a855f7;
+  --mobile-menu-bg: #2a1142; /* mobile dropdown panel, matches poster card tone */
+  --mobile-menu-hover-bg: #a855f7;
+  --mobile-menu-hover-text: #ffffff;
+  --navbar-border: rgba(168, 85, 247, 0.25);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.navbar {
+  background: linear-gradient(
+    180deg,
+    var(--navbar-bg) 0%,
+    var(--navbar-bg-2) 100%
+  );
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1rem;
+  position: sticky;
+  top: 40px; /* Height of the TopBar */
+  z-index: 999;
+  border-bottom: 1px solid var(--navbar-border);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  z-index: 1;
+  width: 100%;
+  max-width: 1400px;
+  padding: 0 32px;
+  margin: 0 auto;
+}
+
+.navbar-logo {
+  color: var(--navbar-text-color);
+  justify-self: start;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 1.6rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.5px;
+}
+
+.logo-highlight {
+  color: var(--navbar-accent);
+  margin: 0 0.3rem;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  gap: 0.25rem;
+}
+
+.nav-item-mobile-only {
+  display: none; /* Hide on desktop */
+}
+
+.nav-item {
+  height: 80px;
+}
+
+.nav-links {
+  color: var(--navbar-text-color);
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 0.5rem 1.1rem;
+  height: 100%;
+  font-weight: 500;
+  border-bottom: 3px solid transparent;
+  transition:
+    color 0.2s ease-out,
+    border-color 0.2s ease-out;
+}
+
+.nav-links:hover {
+  color: var(--navbar-accent-soft);
+}
+
+.nav-item-button {
+  margin-left: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.nav-links-button {
+  background-color: var(--navbar-accent);
+  color: var(--navbar-text-color);
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
+}
+
+.nav-links-button:hover {
+  background-color: var(--navbar-accent-soft);
+  color: var(--navbar-bg);
+  transform: translateY(-2px);
+}
+
+.menu-icon {
+  display: none;
+}
+
+/* ===== Large tablets / small laptops ===== */
+@media screen and (max-width: 1100px) {
+  .navbar-container {
+    padding: 0 20px;
+  }
+
+  .nav-links {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.95rem;
+  }
+}
+
+/* ===== Tablets ===== */
+@media screen and (max-width: 900px) {
+  .nav-menu {
+    display: none;
+  }
+
+  .navbar-logo {
+    font-size: 1.4rem;
+    position: absolute;
+    left: 32px;
+  }
+
+  .menu-icon {
+    display: block;
+    position: absolute;
+    right: 32px;
+    font-size: 1.7rem;
+    cursor: pointer;
+    color: var(--navbar-text-color);
+  }
+
+  .top-bar-contact {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    gap: 1rem;
+  }
+
+  /* This is a new class to hold the contact info from the top bar */
+  .nav-mobile-contact-info {
+    padding: 1rem;
+    border-bottom: 1px solid var(--navbar-border);
+  }
+
+  .nav-item-mobile-only {
+    display: block; /* Show on mobile */
+    width: 100%;
+  }
+
+  .nav-menu {
+    height: calc(100vh - 80px);
+    position: absolute;
+    top: 80px;
+    right: 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(100%) scale(0.98); /* Start slightly smaller and off-screen */
+    transform-origin: right center; /* Scale from the right edge */
+    transition:
+      transform 0.4s ease-out,
+      opacity 0.4s ease-out,
+      visibility 0.4s; /* Ensure visibility transitions smoothly */
+    gap: 0;
+  }
+
+  .nav-menu.active {
+    background: var(--mobile-menu-bg);
+    width: 100%;
+    flex-direction: column;
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0) scale(1); /* End at full size and on-screen */
+    z-index: 1;
+    border-top: 1px solid var(--navbar-border);
+  }
+
+  .nav-item {
+    width: 100%;
+    height: auto;
+  }
+
+  .nav-links {
+    text-align: center;
+    justify-content: center;
+    padding: 1.4rem;
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid var(--navbar-border);
+  }
+
+  .nav-links:hover,
+  .nav-links:active {
+    background-color: rgba(168, 85, 247, 0.1);
+    color: var(--navbar-accent-soft);
+  }
+
+  .nav-item-button {
+    height: auto;
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--navbar-border);
+    display: flex;
+    justify-content: center;
+  }
+}
