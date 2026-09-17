@@ -6,7 +6,7 @@ A modern business website for BN Tech Solution, built with React and Vite.
 
 - Responsive business landing page
 - About, services, contact, and booking sections
-- Formspree-ready contact and booking forms
+- Frontend-only contact and booking forms
 - Clean modern styling and layout
 
 ## Tech Stack

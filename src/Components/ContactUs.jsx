@@ -15,7 +15,6 @@ const isValidEmail = (email) => {
 };
 
 const ContactUs = () => {
-  const scriptUrl = 'https://script.google.com/macros/s/AKfycbwSlQ8Hp9SVg_MnSQBfgCbwIjVDGVi3jSx4MYWsZMc0M55Uxf2wAcNZslmhgPVHzTG81g/exec';
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -70,17 +69,6 @@ const ContactUs = () => {
     setLastSubmitTime(now);
 
     try {
-      const formPayload = new FormData();
-      formPayload.append('name', formData.name.trim());
-      formPayload.append('email', formData.email.trim());
-      formPayload.append('message', formData.message.trim());
-
-      await fetch(scriptUrl, {
-        method: 'POST',
-        body: formPayload,
-        mode: 'no-cors',
-      });
-
       setSubmitStatus('success');
       setFormData({ name: '', email: '', message: '' });
     } catch (err) {
@@ -138,7 +126,6 @@ const ContactUs = () => {
               tabIndex={-1}
               autoComplete="off"
             />
-            <input type="hidden" name="_captcha" value="false" />
             {errors.submit && <div className="form-error-message">{errors.submit}</div>}
             {submitStatus === 'success' && (
               <div className="form-success-message">

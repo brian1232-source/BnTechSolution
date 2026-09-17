@@ -20,8 +20,6 @@ const isValidPhone = (phone) => {
 };
 
 const BookService = () => {
-  const scriptUrl = 'https://script.google.com/macros/s/AKfycbwSlQ8Hp9SVg_MnSQBfgCbwIjVDGVi3jSx4MYWsZMc0M55Uxf2wAcNZslmhgPVHzTG81g/exec';
-
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -100,21 +98,6 @@ const BookService = () => {
     setLastSubmitTime(now);
 
     try {
-      const formPayload = new FormData();
-      formPayload.append('formType', 'booking');
-      formPayload.append('name', formData.name.trim());
-      formPayload.append('email', formData.email.trim());
-      formPayload.append('phone', formData.phone.trim());
-      formPayload.append('service', formData.service);
-      formPayload.append('location', formData.location.trim());
-      formPayload.append('message', formData.message.trim());
-
-      await fetch(scriptUrl, {
-        method: 'POST',
-        body: formPayload,
-        mode: 'no-cors',
-      });
-
       setSubmitStatus('success');
       setFormData({
         name: '',
@@ -153,7 +136,6 @@ const BookService = () => {
             tabIndex={-1}
             autoComplete="off"
           />
-          <input type="hidden" name="_captcha" value="false" />
           {errors.submit && <div className="form-error-message">{errors.submit}</div>}
           {submitStatus === 'success' && (
             <div className="form-success-message">
