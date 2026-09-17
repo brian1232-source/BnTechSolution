@@ -126,15 +126,19 @@ const BookService = () => {
           message: '',
         });
       } else {
-        const data = await response.json();
-        if (data.errors) {
-          setErrors({ submit: data.errors[0].message });
-        } else {
-          setErrors({ submit: 'Something went wrong. Please try again.' });
+        try {
+          const data = await response.json();
+          if (data.errors) {
+            setErrors({ submit: data.errors[0].message });
+          } else {
+            setErrors({ submit: 'Something went wrong. Please try again.' });
+          }
+        } catch {
+          e.target.submit();
         }
       }
     } catch (err) {
-      setErrors({ submit: 'Network error. Please check your connection and try again.' });
+      e.target.submit();
     } finally {
       setIsSubmitting(false);
     }
