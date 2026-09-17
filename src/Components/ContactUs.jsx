@@ -15,7 +15,7 @@ const isValidEmail = (email) => {
 };
 
 const ContactUs = () => {
-  const scriptUrl = 'https://script.google.com/macros/s/AKfycbyU7GZK5ncWmQiiJ_hIpcx0-a9tZTaEX1WKAaZ-LerHBras5w3j8JF62LLeqMXcOVq9tw/exec';
+  const scriptUrl = 'https://script.google.com/macros/s/AKfycbwSlQ8Hp9SVg_MnSQBfgCbwIjVDGVi3jSx4MYWsZMc0M55Uxf2wAcNZslmhgPVHzTG81g/exec';
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
