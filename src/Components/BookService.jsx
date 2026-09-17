@@ -20,8 +20,6 @@ const isValidPhone = (phone) => {
 };
 
 const BookService = () => {
-  const bookingFormAction = import.meta.env.VITE_FORMSPREE_BOOKING_ENDPOINT || 'https://formspree.io/f/your_form_id';
-
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -99,49 +97,18 @@ const BookService = () => {
     setErrors({});
     setLastSubmitTime(now);
 
-    const formDataWithBotCheck = new FormData(e.target);
-    formDataWithBotCheck.set('name', sanitizeInput(formData.name));
-    formDataWithBotCheck.set('email', sanitizeInput(formData.email));
-    formDataWithBotCheck.set('phone', sanitizeInput(formData.phone));
-    formDataWithBotCheck.set('location', sanitizeInput(formData.location));
-    formDataWithBotCheck.set('message', sanitizeInput(formData.message));
-
-    try {
-      const response = await fetch(bookingFormAction, {
-        method: 'POST',
-        body: formDataWithBotCheck,
-        headers: {
-          'Accept': 'application/json',
-        },
+    setTimeout(() => {
+      setSubmitStatus('success');
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        service: '',
+        location: '',
+        message: '',
       });
-
-      if (response.ok) {
-        setSubmitStatus('success');
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          service: '',
-          location: '',
-          message: '',
-        });
-      } else {
-        try {
-          const data = await response.json();
-          if (data.errors) {
-            setErrors({ submit: data.errors[0].message });
-          } else {
-            setErrors({ submit: 'Something went wrong. Please try again.' });
-          }
-        } catch {
-          e.target.submit();
-        }
-      }
-    } catch (err) {
-      e.target.submit();
-    } finally {
       setIsSubmitting(false);
-    }
+    }, 500);
   };
 
   return (
@@ -155,8 +122,6 @@ const BookService = () => {
         </div>
         <form
           className="book-service-form"
-          action={bookingFormAction}
-          method="POST"
           onSubmit={handleSubmit}
         >
           <input

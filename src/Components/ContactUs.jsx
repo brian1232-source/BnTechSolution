@@ -15,7 +15,6 @@ const isValidEmail = (email) => {
 };
 
 const ContactUs = () => {
-  const formAction = import.meta.env.VITE_FORMSPREE_CONTACT_ENDPOINT;
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -64,46 +63,16 @@ const ContactUs = () => {
       return;
     }
 
-    if (!formAction) {
-      setErrors({ submit: 'Formspree endpoint is missing. Please set VITE_FORMSPREE_CONTACT_ENDPOINT in your .env file.' });
-      return;
-    }
-
     setIsSubmitting(true);
     setSubmitStatus(null);
     setErrors({});
     setLastSubmitTime(now);
 
-    const formDataWithBotCheck = new FormData(e.target);
-    formDataWithBotCheck.set('name', sanitizeInput(formData.name));
-    formDataWithBotCheck.set('email', sanitizeInput(formData.email));
-    formDataWithBotCheck.set('message', sanitizeInput(formData.message));
-
-    try {
-      const response = await fetch(formAction, {
-        method: 'POST',
-        body: formDataWithBotCheck,
-        headers: {
-          'Accept': 'application/json',
-        },
-      });
-
-      if (response.ok) {
-        setSubmitStatus('success');
-        setFormData({ name: '', email: '', message: '' });
-      } else {
-        const data = await response.json();
-        if (data.errors) {
-          setErrors({ submit: data.errors[0].message });
-        } else {
-          setErrors({ submit: 'Something went wrong. Please try again.' });
-        }
-      }
-    } catch (err) {
-      setErrors({ submit: 'Network error. Please check your connection and try again.' });
-    } finally {
+    setTimeout(() => {
+      setSubmitStatus('success');
+      setFormData({ name: '', email: '', message: '' });
       setIsSubmitting(false);
-    }
+    }, 500);
   };
 
   return (
@@ -143,8 +112,6 @@ const ContactUs = () => {
           </div>
           <form
             className="contact-card contact-form"
-            action={formAction}
-            method="POST"
             onSubmit={handleSubmit}
           >
             <input
