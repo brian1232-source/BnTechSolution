@@ -101,6 +101,7 @@ const BookService = () => {
 
     try {
       const formPayload = new FormData();
+      formPayload.append('formType', 'booking');
       formPayload.append('name', formData.name.trim());
       formPayload.append('email', formData.email.trim());
       formPayload.append('phone', formData.phone.trim());
